@@ -1,0 +1,12 @@
+{
+  "name" : "qt-qrc",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "97dd26728e3856ed1ab62ee74ee3a391d9c81d19",
+  "dependencies" : [ {
+    "name" : "qt5",
+    "version>=" : "5.15.12"
+  }, {
+    "name" : "fmt",
+    "version>=" : "10.2.1"
+  } ]
+}
