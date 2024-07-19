@@ -25,16 +25,19 @@ public:
     QString get_rcc_prefix() const;
     QStringList get_rcc_file_list() const;
 
+    static bool entry(const QString &qrc_path, const QString &dir_path);
+
 
 
 private:
     static QString get_relative_path(const QString &img_prefix, const QString &qrc_prefix);
-
+    void on_push_button_clicked();
 
 
     Ui::qrc_dialog *ui;
-    QString img_prefix_;
+    bool exit_{false};
     QString qrc_prefix_;
+    QString img_prefix_;
     QStringList imgfiles_;
 };
 

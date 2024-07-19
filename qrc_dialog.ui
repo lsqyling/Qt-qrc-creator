@@ -178,22 +178,6 @@
  </resources>
  <connections>
   <connection>
-   <sender>pushButtonOk</sender>
-   <signal>clicked()</signal>
-   <receiver>qrc_dialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>375</x>
-     <y>203</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>245</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushButtonCancel</sender>
    <signal>clicked()</signal>
    <receiver>qrc_dialog</receiver>

@@ -141,7 +141,6 @@ public:
 
 
         retranslateUi(qrc_dialog);
-        QObject::connect(pushButtonOk, SIGNAL(clicked()), qrc_dialog, SLOT(accept()));
         QObject::connect(pushButtonCancel, SIGNAL(clicked()), qrc_dialog, SLOT(reject()));
 
         pushButtonOk->setDefault(true);

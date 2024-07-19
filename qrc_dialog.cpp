@@ -3,11 +3,12 @@
 //
 
 // You may need to build the project (run Qt uic code generator) to get "ui_qrc_dialog.h" resolved
-
+#include <QMessageBox>
 #include "qrc_dialog.h"
 #include "ui_qrc_dialog.h"
 #include "QFileDialog"
 #include "fmt/core.h"
+#include "QTextStream"
 
 
 qrc_dialog::qrc_dialog(const QString &qrc_path, const QString &dir, QWidget *parent) :
@@ -15,14 +16,19 @@ qrc_dialog::qrc_dialog(const QString &qrc_path, const QString &dir, QWidget *par
 {
     ui->setupUi(this);
     this->setWindowTitle("qrc文件生成器");
+
     imgfiles_ =
             QFileDialog::getOpenFileNames(this, "请选择要导入的资源文件", dir,
                                           "文件(*.*)");
     if (imgfiles_.isEmpty())
+    {
+        exit_ = true;
         return ;
+    }
 
     img_prefix_ = imgfiles_[0].left(imgfiles_[0].lastIndexOf("/") + 1);
     qrc_prefix_ = qrc_path.left(qrc_path.lastIndexOf("/") + 1);
+    on_push_button_clicked();
 }
 
 qrc_dialog::~qrc_dialog()
@@ -71,4 +77,40 @@ QStringList qrc_dialog::get_rcc_file_list() const
         list << (relative + filename);
     }
     return list;
+}
+
+bool qrc_dialog::entry(const QString &qrc_path, const QString &dir_path)
+{
+    qrc_dialog qd(qrc_path, dir_path);
+    if (qd.exit_)
+        return false;
+    return (qd.exec() == QDialog::Accepted);
+}
+
+void qrc_dialog::on_push_button_clicked()
+{
+    connect(ui->pushButtonOk, &QPushButton::clicked,
+            [=, this] {
+                QFile file(get_qrc_name());
+                if (file.open(QIODevice::ReadWrite | QIODevice::Truncate | QIODevice::Text))
+                {
+                    QTextStream ts(&file);
+                    ts << "<RCC>\n";
+                    ts << QString("\t<qresource prefix=\"%1\">\n").arg(get_rcc_prefix());
+                    auto list = get_rcc_file_list();
+                    for (const auto &item: list)
+                    {
+                        ts << "\t\t" + QString("<file>%1</file>\n").arg(item);
+                    }
+                    ts << "\t</qresource>\n";
+                    ts << "</RCC>\n";
+                    file.close();
+                    accept();
+                }
+                else
+                {
+                    QMessageBox::critical(this, "Error", "qrc文件保存失败");
+                    reject();
+                }
+            });
 }

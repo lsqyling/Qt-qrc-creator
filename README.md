@@ -1,4 +1,11 @@
 # Qt-QRC Creator工具
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://github.com/lsqyling/qt-qrc/blob/main/LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-Linux-blue)](https://img.shields.io/badge/Platform-Linux-blue)
+[![Windows](https://img.shields.io/badge/Windows-blue)](https://img.shields.io/badge/Windows-blue)
+[![Language](https://img.shields.io/badge/Language-C%2B%2B20-red)](https://en.cppreference.com/w/cpp/compiler_support/20)
+[![Qt](https://img.shields.io/badge/Qt-red)](https://doc.qt.io/)
+
+
 简介：一个基于Qt开发的小工具，适用与多个平台，Windows、Linux等。
 解决的痛点是，使用CLion基于QT开发带有界面的程序时，
 无法自动导入资源生成.qrc资源文件。使用本工具可以轻松导入资源文件，自动生成.qrc文件。

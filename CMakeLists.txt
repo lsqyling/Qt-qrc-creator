@@ -39,7 +39,6 @@ find_package(fmt REQUIRED)
 add_executable(qrc main.cpp
         qrc_dialog.cpp
         qrc_dialog.h
-        res.qrc
 )
 target_link_libraries(qrc
         Qt5::Core
